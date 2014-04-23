@@ -8,8 +8,9 @@
  */
 class IndexController extends Yaf_Controller_Abstract {
 
-    public function indexAction() {//默认Action
-        $this->getView()->assign("content", "Hello World");
+    public function indexAction() {
+        $db = new DataModel();
+        $this->getView()->assign("content", $db->fetchAll());
     }
 
     public function testAction() {

@@ -8,7 +8,7 @@
  */
 
 define('APP_PATH', realpath(dirname(__FILE__) . '/../'));
-define('LIB_PATH', APP_PATH . '/application/library/');
-$app = new Yaf_Application(APP_PATH . '/conf/application.ini');
+define('LIB_PATH', APP_PATH . '/library');
+$app = new Yaf_Application(APP_PATH . '/conf/application.ini', 'develop');
 $app->bootstrap()
     ->run();
