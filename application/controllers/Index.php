@@ -9,6 +9,8 @@
 class IndexController extends Yaf_Controller_Abstract {
 
     public function indexAction() {
+        //$a = new Dxl_File_Config();
+        //var_dump($a);die;
         $db = new DataModel();
         $this->getView()->assign("content", $db->fetchAll());
     }

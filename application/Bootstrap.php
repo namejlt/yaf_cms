@@ -20,10 +20,6 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
         $this->_config = $config;
     }
 
-    public function _initIncludePath(){
-        set_include_path(get_include_path() . PATH_SEPARATOR . $this->_config->application->library);
-    }
-
     public function _initErrors(){
         if($this->_config->application->showErrors){
             error_reporting (-1);

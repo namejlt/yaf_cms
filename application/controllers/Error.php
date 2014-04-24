@@ -10,14 +10,13 @@ class ErrorController extends Yaf_Controller_Abstract {
     public function errorAction() {
         $exception = $this->getRequest()->getException();
         $showErrors = $this->_config->application->showErrors;
+        if ($showErrors) {
+            return $this->_showError($exception);
+        }
     
         switch(true):
             case ($exception instanceof Yaf_Exception_LoadFailed):
-                if ($showErrors) {
-                    return $this->_showError($exception);
-                } else {
-                    return $this->_pageNotFound();
-                }
+                return $this->_pageNotFound();
             default:
                 return $this->_unknownError();
         endswitch;
@@ -29,7 +28,7 @@ class ErrorController extends Yaf_Controller_Abstract {
     }
 
     private function _unknownError(){
-        $this->getResponse()->setHeader('HTTP/1.0 500 Internal Server Error');
+        $this->getResponse()->setHeader(500, 'HTTP/1.0 500 Internal Server Error');
         $this->_view->error = 'Application Error';
     }
 
