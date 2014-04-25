@@ -6,17 +6,22 @@
  * @date: 14-4-1
  * @time: 上午9:18
  */
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends base_controller_base {
 
     public function indexAction() {
-        //$a = new Dxl_File_Config();
-        //var_dump($a);die;
         $db = new DataModel();
-        $this->getView()->assign("content", $db->fetchAll());
+        $content = $db->fetchAll()->toArray();
+        $this->_view->assign('content', $content);
+        $this->_view->assign('name', 'this is a name');
     }
 
     public function testAction() {
-        $test = new Test_Foo_Demo();
+        echo ' index testss 1';
+        die;
+    }
+
+    public function test2Action() {
+        echo ' index testss 2';
         die;
     }
 }

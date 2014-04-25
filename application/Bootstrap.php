@@ -1,12 +1,5 @@
 <?php
 /**
- * @file Bootstrap.php
- * 此脚本页面的用途
- * @author: dalong.jia
- * @date: 14-4-1
- * @time: 上午11:27
- */
-/**
  * 所有在Bootstrap类中, 以_init开头的方法, 都会被Yaf调用,
  * 这些方法, 都接受一个参数:Yaf_Dispatcher $dispatcher
  * 调用的次序, 和申明的次序相同
@@ -24,17 +17,25 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
         if($this->_config->application->showErrors){
             error_reporting (-1);
             ini_set('display_errors','On');
+        } else {
+            error_reporting (0);
+            ini_set('display_errors','Off');
         }
     }
 
     public function _initNamespaces(){
-        Yaf_Loader::getInstance()->registerLocalNameSpace($this->_config->library->namespace->toArray());
+        Yaf_Loader::getInstance()->registerLocalNameSpace($this->_config->local_lib->namespace->toArray());
     }
 
     public function _initPlugin(Yaf_Dispatcher $dispatcher){
-        //$plugin = new TestPlugin();
+        $viewPlugin = new ViewPlugin();
+        $dispatcher->registerPlugin($viewPlugin);
+    }
 
-        //$dispatcher->registerPlugin($plugin);
+    public function _initView(Yaf_Dispatcher $dispatcher) {
+        $smarty = new Smarty_Adapter(null, $this->_config->smarty);
+        $smarty->registerFunction('function', 'truncate', array('common_string', 'truncate'));
+        $dispatcher->setView($smarty);
     }
 
     public function _initDefaultDbAdapter() {

@@ -5,6 +5,14 @@
     <title>Document</title>
 </head>
 <body>
-<?php var_dump($content); ?>
+<div>{$name}</div>
+<div>
+    <ul>
+    {foreach item=info from=$content}
+        <li>{$info.id} -- {$info.name}</li>
+    {/foreach}
+    </ul>
+</div>
+
 </body>
 </html>

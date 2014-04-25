@@ -7,10 +7,14 @@
  * Des: 
  */
 
-class IndexController extends Yaf_Controller_Abstract {
+class IndexController extends base_controller_base {
 
-    public function indexAction() {//默认Action
-        echo 'this is admin';
+    public function indexAction() {
+        $this->_view->assign('name', 'administrator');
+    }
+
+    public function testAction() {
+        echo 'admin test';
         die;
     }
 

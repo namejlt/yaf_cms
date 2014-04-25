@@ -23,13 +23,11 @@ class ErrorController extends Yaf_Controller_Abstract {
     }
 
     private function _pageNotFound(){
-        $this->getResponse()->setHeader(404, 'HTTP/1.0 404 Not Found');
-        $this->_view->error = 'Page was not found';
+        $this->_view->error = '404 Page was not found';
     }
 
     private function _unknownError(){
-        $this->getResponse()->setHeader(500, 'HTTP/1.0 500 Internal Server Error');
-        $this->_view->error = 'Application Error';
+        $this->_view->error = '500 Application Error';
     }
 
     private function _showError($exception) {
